@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 
-def decision_regions(X, y, classifier, resolution=0.02):
+def plot_decision_regions(X, y, classifier, resolution=0.02):
 
     # markers and color map
     markers = ('s', 'x', '^', 'v')
