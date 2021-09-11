@@ -45,16 +45,18 @@ class AdalineGD(Classifier):
         self.w_ = rgen.normal(loc=0.0, scale=0.01, size=1 + X.shape[1])
         self.cost_ = []
 
-        for i in range(self.n_iter):
+        for _ in range(self.n_iter):
             net_input = self.net_input(X)
             output = self.activation(net_input)
 
             # calculate errors: yi - φ(zi)
             errors = y - output
 
+            # w = w + Δw
             self.w_[1:] += self.eta * X.T.dot(errors)
             self.w_[0] += self.eta * errors.sum()
 
+            # Sum of squared error (SEE)
             cost = (errors ** 2).sum / 2.0
 
             self.cost_.append(cost)
@@ -63,3 +65,6 @@ class AdalineGD(Classifier):
     def activation(self, X):
         """活線型活性化関数の出力を計算。ADALINEでは不要"""
         return X
+
+    def predict(self, X):
+        return np.where(self.activation(self.net_input(X)) >= 0.0, 1, -1)
