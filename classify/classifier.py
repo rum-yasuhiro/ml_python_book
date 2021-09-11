@@ -57,7 +57,7 @@ class AdalineGD(Classifier):
             self.w_[0] += self.eta * errors.sum()
 
             # Sum of squared error (SEE)
-            cost = (errors ** 2).sum / 2.0
+            cost = (errors ** 2).sum() / 2.0
 
             self.cost_.append(cost)
         return self
